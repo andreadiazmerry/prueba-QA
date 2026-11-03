@@ -1,0 +1,6 @@
+$ curl -X POST localhost:8080/api/v1/meter/getAll -d '{"filter":{"meter_id":"109"}}'
+count: 1 ['M-109']
+$ curl -X POST localhost:8080/api/v1/meter/getAll -d '{"filter":{"meter_id":"M-109"}}'
+count: 1 ['M-109']
+$ curl -X POST localhost:8080/api/v1/meter/getAll -d '{"filter":{"meter_id":"m-109"}}'
+count: 0 []

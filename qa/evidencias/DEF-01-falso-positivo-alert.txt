@@ -1,0 +1,10 @@
+$ curl -X POST /api/v1/meter/getById/M-106 (extracto)
+{
+  "meter_id": "M-106",
+  "status": "ALERT",
+  "severity": "LOW",
+  "anomaly_type": "FALSE_POSITIVE"
+}
+
+$ GET /api/v1/dashboard/getSummary (status_counts)
+{"normal": 8, "alert": 2, "critical": 2}

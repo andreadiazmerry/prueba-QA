@@ -111,5 +111,5 @@ macOS (MacBook Air), Docker Desktop 4.97, Chrome actual; zona horaria America/Bo
 ## 6. Uso de IA
 
 Usé Claude (Anthropic) como asistente para:
-- Leer más rápido la documentación y el código, y proponer hipótesis de dónde buscar defectos.
-- Generar el esqueleto del proyecto de Playwright (config, page objects, fixtures) y redactar borradores de los documentos.
+- Leer más rápido la documentación y el código.
+- Generar el esqueleto del proyecto de Playwright (config, page objects, fixtures).
