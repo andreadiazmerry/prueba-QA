@@ -113,3 +113,20 @@ macOS (MacBook Air), Docker Desktop 4.97, Chrome actual; zona horaria America/Bo
 Usé Claude (Anthropic) como asistente para:
 - Leer más rápido la documentación y el código.
 - Generar el esqueleto del proyecto de Playwright (config, page objects, fixtures).
+
+## Resumen ejecutivo
+
+**Decisión: NO liberar este build a producción.**
+
+El build es apto para pruebas (smoke 8/8), pero tiene 5 defectos confirmados, dos de severidad alta que afectan directamente la decisión del operador:
+
+- **DEF-01 (Alta/Alta):** M-106, un falso positivo, aparece como "Alerta". El operador escala lo que el motor dice "No escalar" y los KPI de planta salen mal (8·2·2 en vez de 9·1·2).
+- **DEF-04 (Alta/Alta):** toda "hora de planta" se muestra 5 h antes en America/Bogota. Afecta al 100 % de los usuarios y lleva a revisar la ventana de tiempo equivocada.
+- **DEF-05 (Media/Alta):** la paginación no deja llegar a la página 2. M-111 y M-112 (este último CRÍTICO) quedan ocultos por la navegación normal.
+- **DEF-02 (Baja/Media)** y **DEF-03 (Media/Baja):** la búsqueda distingue mayúsculas y `page` negativo devuelve 500.
+
+Los cinco tienen causa raíz identificada y arreglo pequeño. Además, los tests existentes no los detectan (por ejemplo, Vitest fuerza `TZ=UTC`). Hay tests unitarios propuestos y tests Playwright con `test.fail()` que pasarán cuando se corrijan.
+
+**Condición para liberar:** corregir DEF-01, DEF-04 y DEF-05, y que la suite de Playwright y los tests unitarios propuestos pasen en verde.
+
+**Riesgos abiertos:** el narrador con OpenAI no se probó (se usó el motor de plantilla), no hubo pruebas de carga ni de concurrencia a escala, y no se probaron navegadores fuera de Chromium/Firefox.
